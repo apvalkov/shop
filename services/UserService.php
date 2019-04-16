@@ -7,8 +7,21 @@ use app\models\forms\user\RegistrationForm;
 use app\models\forms\user\UserForm;
 use app\models\User;
 
+/**
+ * Сервис работы с пользователем.
+ */
 class UserService
 {
+    /**
+     * Регистрация пользователя.
+     *
+     *
+     * @param RegistrationForm $form
+     *
+     * @return bool
+     *
+     * @throws \yii\base\Exception
+     */
     public function register(RegistrationForm $form)
     {
         $user = new User();
@@ -20,6 +33,15 @@ class UserService
         return $user->save();
     }
 
+    /**
+     * Обновление пользователя.
+     *
+     * @param UserForm $form
+     *
+     * @return bool
+     *
+     * @throws \yii\base\Exception
+     */
     public function update(UserForm $form)
     {
         if (!empty($form->newPassword)) {
@@ -29,6 +51,13 @@ class UserService
         return $form->save();
     }
 
+    /**
+     * Авторизация пользователя.
+     *
+     * @param LoginForm $form
+     *
+     * @return bool
+     */
     public function login(LoginForm $form)
     {
         $duration = 0;
@@ -45,6 +74,11 @@ class UserService
         return \Yii::$app->user->login($user, $duration);
     }
 
+    /**
+     * Выход пользователя из системы.
+     *
+     * @return bool
+     */
     public function logout()
     {
         return \Yii::$app->user->logout();

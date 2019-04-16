@@ -15,7 +15,6 @@ class UserService
     /**
      * Регистрация пользователя.
      *
-     *
      * @param RegistrationForm $form
      *
      * @return bool

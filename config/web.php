@@ -49,7 +49,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'login' => 'user/login'
+                'login' => 'user/login',
+                'category/<action: create|update|delete|index>' => 'category/<action>',
+                'good/<category:\S+>/<good:\S+>' => 'good/view',
+                'category/<slug:\S+>' => 'category/view',
             ],
         ],
     ],

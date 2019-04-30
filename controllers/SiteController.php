@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Category;
+use app\models\search\GoodSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -59,7 +61,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $categories = Category::find()->active()->all();
+        $searchModel = new GoodSearch();
+        $dataProvider = $searchModel->search(\Yii::$app->request->get());
+
+        return $this->render('index', [
+            'categories' => $categories,
+            'dataProvider' => $dataProvider
+        ]);
     }
 
     /**

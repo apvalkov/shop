@@ -53,7 +53,13 @@ $config = [
                 'category/<action: create|update|delete|index>' => 'category/<action>',
                 'good/<category:\S+>/<good:\S+>' => 'good/view',
                 'category/<slug:\S+>' => 'category/view',
+                '<module>/<controller>/<action>' => '<module>/<controller>/<action>'
             ],
+        ],
+    ],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\AdminModule',
         ],
     ],
     'params' => $params,

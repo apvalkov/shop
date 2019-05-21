@@ -116,7 +116,7 @@ class CategoryController extends Controller
         $model = CategoryForm::findOne($id);
 
         if (!$model) {
-            throw new NotFoundHttpException('Категория не найден');
+            throw new NotFoundHttpException('Категория не найдена');
         }
 
         return $model;

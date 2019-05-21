@@ -10,7 +10,7 @@ use yii\helpers\Inflector;
 
 return [
     'id' => $index + 1,
-    'category_id' => $faker->randomElement(Category::find()->select('id')->active()->column()),
+    'category_id' => $faker->randomElement(Category::find()->select('id')->where(['>', 'id', 20])->column()),
     'title' => $title = $faker->unique()->name,
     'slug' => Inflector::slug(implode('-', explode(' ', $title))),
     'description' => $faker->text(700),

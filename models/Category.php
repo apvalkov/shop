@@ -13,6 +13,7 @@ use yii\db\Expression;
  * Модель категории.
  *
  * @property int $id
+ * @property int $parent_id
  * @property string $title
  * @property string $slug
  * @property string $status
@@ -20,6 +21,8 @@ use yii\db\Expression;
  * @property string $updated_at
  *
  * @property Good[] $goods
+ * @property Category $parent
+ * @property Category[] $children
  */
 class Category extends ActiveRecord
 {
@@ -61,12 +64,14 @@ class Category extends ActiveRecord
                 return $this->isNewRecord ? $query : $query->andWhere(['<>', 'id', $this->id]);
             }],
             [['title', 'status'], 'string', 'max' => 255],
+            [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['parent_id' => 'id']]
         ];
     }
 
     public function attributeLabels()
     {
         return [
+            'parent_id' => 'Родитель',
             'title' => 'Название',
             'slug' => 'Url',
             'status' => 'Статус',
@@ -118,5 +123,21 @@ class Category extends ActiveRecord
     public function getActiveGoods()
     {
         return Good::find()->where(['category_id' => $this->id])->active();
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getParent()
+    {
+        return $this->hasOne(self::class, ['id' => 'parent_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getChildren()
+    {
+        return $this->hasMany(self::class, ['parent_id' => 'id']);
     }
 }

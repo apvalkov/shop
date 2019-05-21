@@ -18,4 +18,9 @@ class CategoryQuery extends ActiveQuery
     {
         return $this->andWhere(['status' => Category::STATUS_ACTIVE]);
     }
+
+    public function root()
+    {
+        return $this->andWhere(['is', 'parent_id', null]);
+    }
 }

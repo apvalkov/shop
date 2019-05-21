@@ -5,7 +5,7 @@
  * @var $parents array
  * @var $statuses array
  */
-$this->title = "Обновить категории";
+$this->title = "Обновить категорию";
 $this->params['breadcrumbs'][] = ['label' => 'Админ панель', 'url' => '/admin'];
 $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => '/admin/category'];
 $this->params['breadcrumbs'][] = ['label' => $this->title];

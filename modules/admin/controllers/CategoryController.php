@@ -74,7 +74,7 @@ class CategoryController extends Controller
 
     public function actionUpdate($id)
     {
-        $model = CategoryForm::findOne($id);
+        $model = CategoryForm::findModel($id);
         $parents = Category::find()->root()->with(['children'])->all();
         $parents = CategoryHelper::getTree($parents);
         $statuses = Category::getStatuses();
@@ -100,5 +100,25 @@ class CategoryController extends Controller
     public function actionDelete()
     {
 
+    }
+
+    /**
+     * Поиск записи.
+     *
+     * @param $id
+     *
+     * @return CategoryForm|null
+     *
+     * @throws NotFoundHttpException
+     */
+    private function findModel($id)
+    {
+        $model = CategoryForm::findOne($id);
+
+        if (!$model) {
+            throw new NotFoundHttpException('Пользователь не найден');
+        }
+
+        return $model;
     }
 }

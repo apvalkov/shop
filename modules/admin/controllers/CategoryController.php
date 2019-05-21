@@ -72,9 +72,24 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function actionUpdate()
+    public function actionUpdate($id)
     {
+        $model = CategoryForm::findOne($id);
+        $parents = Category::find()->root()->with(['children'])->all();
+        $parents = CategoryHelper::getTree($parents);
+        $statuses = Category::getStatuses();
 
+        if($this->service->update($model, \Yii::$app->request->post())) {
+            \Yii::$app->session->setFlash('success','Категория успешно обновлена');
+
+            return $this->redirect('/admin/category/index');
+        }
+
+        return $this->render('update',[
+            'model' => $model,
+            'parents' => $parents,
+            'statuses' => $statuses
+        ]);
     }
 
     public function actionView()

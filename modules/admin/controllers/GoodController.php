@@ -49,7 +49,7 @@ class GoodController extends Controller
     {
         $searchModel = new GoodSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
-        $categories = ArrayHelper::map(Category::find()->active()->all(), 'id', 'title');
+        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
         $statuses = GoodSearch::getStatuses();
 
         return $this->render('index', [
@@ -69,7 +69,7 @@ class GoodController extends Controller
      */
     public function actionCreate()
     {
-        $categories = ArrayHelper::map(Category::find()->active()->all(), 'id', 'title');
+        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
         $statuses = Good::getStatuses();
         $model = new GoodForm();
 
@@ -97,7 +97,7 @@ class GoodController extends Controller
      */
     public function actionUpdate($id)
     {
-        $categories = ArrayHelper::map(Category::find()->active()->all(), 'id', 'title');
+        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
         $statuses = Good::getStatuses();
         $model = $this->findModel($id);
 
@@ -128,7 +128,7 @@ class GoodController extends Controller
         $model = $this->findModel($id);
 
         return $this->render('view', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 

@@ -18,16 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
     'attributes' => [
         [
             'attribute' => 'category_id',
-            'value' => function($data){
-                return $data->category->title;
-            },
+            'value' => function (Good $good) {
+                return $good->category->title;
+            }
         ],
         [
             'attribute' => 'status',
             'value' => function (Good $good) {
                 return $good->getStatus();
-            },
-            'filter' => Good::getStatuses()
+            }
         ],
         'title',
         [

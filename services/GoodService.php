@@ -9,8 +9,15 @@ use yii\web\UploadedFile;
 
 class GoodService
 {
+    /**
+     * @var FileService
+     */
     private $fileService;
 
+    /**
+     * GoodService constructor
+     * @param FileService $fileService
+     */
     public function __construct(FileService $fileService)
     {
         $this->fileService = $fileService;

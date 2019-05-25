@@ -15,4 +15,13 @@ class CategoryService
 
         return false;
     }
+
+    public function update(CategoryForm $form, array $data)
+    {
+        if ($form->load($data) && $form->save()){
+            return true;
+        }
+
+        return false;
+    }
 }

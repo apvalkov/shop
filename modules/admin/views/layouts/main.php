@@ -54,6 +54,10 @@ AppAsset::register($this);
                             'label' => 'Категории',
                             'url' => ['/admin/category/index'],
                         ],
+                        [
+                            'label' => 'Товары',
+                            'url' => ['/admin/good/index'],
+                        ],
                     ],
                 ]); ?>
             </div>
